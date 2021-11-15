@@ -35,7 +35,7 @@ Input values are compared in pairs, so if more than two values are provided, the
 
 The rules for merging the input values is as below.
 
-1) If neither of the values are the same?
+1) If one of the values is not an object?
 	* The second value survives.
 2) If both values are an array?
 	* An new array is created with the items from the first array and then the values of the second array.
