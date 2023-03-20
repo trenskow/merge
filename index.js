@@ -8,11 +8,7 @@
 
 const isObject = (value) => typeof value === 'object' && value !== null;
 
-const _merge = (options = {
-	object: 'merge',
-	array: 'merge',
-	other: 'second'
-}) => {
+const _merge = (options = {}) => {
 
 	if (typeof options === 'string') {
 		options = {
@@ -29,7 +25,7 @@ const _merge = (options = {
 			let [ first, second ] = values;
 
 			if (!isObject(first) || !isObject(second)) {
-				switch (options.other) {
+				switch (options.other || 'second') {
 					case 'second':
 						first = second;
 						break;
@@ -38,7 +34,7 @@ const _merge = (options = {
 				}
 			} else {
 				if (Array.isArray(first) && Array.isArray(second)) {
-					switch (options.array) {
+					switch (options.array || 'merge') {
 						case 'merge':
 							first = first.concat(second);
 							break;
@@ -50,7 +46,7 @@ const _merge = (options = {
 					}
 				} else {
 
-					switch (options.object) {
+					switch (options.object || 'merge') {
 						case 'merge': {
 
 							const firstKeys = Object.keys(first);
