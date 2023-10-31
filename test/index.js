@@ -1,6 +1,6 @@
 //
 // index.js
-// @trenskow/app
+// @trenskow/merge
 //
 // Created by Kristian Trenskow on 2021/11/15
 // For license see LICENSE.
