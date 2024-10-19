@@ -58,7 +58,7 @@ const _merge = (options = {}) => {
 
 							first = Object.assign(
 								Object.fromEntries(oldKeys.map((key) => [key, first[key]])),
-								Object.fromEntries(sharedKeys.map((key) => [key, merge(first[key], second[key])])),
+								Object.fromEntries(sharedKeys.map((key) => [key, _merge(options)(first[key], second[key])])),
 								Object.fromEntries(newKeys.map((key) => [key, second[key]]))
 							);
 
