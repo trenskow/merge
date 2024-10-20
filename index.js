@@ -66,7 +66,7 @@ const _merge = (options = {}) => {
 
 							Object.defineProperties(result, Object.fromEntries(sharedKeys.map((key) => {
 
-								const descriptor = Object.getOwnPropertyDescriptor(first, key);
+								const descriptor = Object.getOwnPropertyDescriptor(second, key);
 
 								return [key, {
 									value: _merge(options)(first[key], second[key]),
