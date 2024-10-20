@@ -6,7 +6,9 @@
 // For license see LICENSE.
 //
 
-const isObject = (value) => typeof value === 'object' && value !== null;
+const isObject = (value) => typeof value === 'object'
+	&& value !== null
+	&& (value.constructor === Object || Array.isArray(value));
 
 const _merge = (options = {}) => {
 
