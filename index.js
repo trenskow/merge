@@ -70,6 +70,7 @@ const _merge = (options = {}) => {
 
 								return [key, {
 									value: _merge(options)(first[key], second[key]),
+									configurable: descriptor.configurable,
 									enumerable: descriptor.enumerable,
 									writable: descriptor.enumerable
 								}];
