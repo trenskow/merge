@@ -61,6 +61,20 @@ describe('merge', () => {
 			});
 		});
 
+		it ('should come back with merged object (with non-enumerable properties).', () => {
+			expect(merge({
+				test: false,
+			}, Object.defineProperty({}, 'nonEnumerable', {
+				value: 123,
+				enumerable: false
+			}))).to.eql(Object.defineProperty({
+				test: false,
+			}, 'nonEnumerable', {
+				value: 123,
+				enumerable: false
+			}));
+		});
+
 	});
 
 	describe('strategy: first', () => {

@@ -51,18 +51,36 @@ const _merge = (options = {}) => {
 					switch (options.object || 'merge') {
 						case 'merge': {
 
-							const firstKeys = Object.keys(first);
-							const secondKeys = Object.keys(second);
+							const firstKeys = Object.getOwnPropertyNames(first);
+							const secondKeys = Object.getOwnPropertyNames(second);
 
 							const oldKeys = firstKeys.filter((key) => !secondKeys.includes(key));
 							const newKeys = secondKeys.filter((key) => !firstKeys.includes(key));
 							const sharedKeys = firstKeys.filter((key) => secondKeys.includes(key));
 
-							first = Object.assign(
-								Object.fromEntries(oldKeys.map((key) => [key, first[key]])),
-								Object.fromEntries(sharedKeys.map((key) => [key, _merge(options)(first[key], second[key])])),
-								Object.fromEntries(newKeys.map((key) => [key, second[key]]))
-							);
+							const result = {};
+
+							Object.defineProperties(result, Object.fromEntries(oldKeys.map((key) => {
+								return [key, Object.getOwnPropertyDescriptor(first, key)];
+							})));
+
+							Object.defineProperties(result, Object.fromEntries(sharedKeys.map((key) => {
+
+								const descriptor = Object.getOwnPropertyDescriptor(first, key);
+
+								return [key, {
+									value: _merge(options)(first[key], second[key]),
+									enumerable: descriptor.enumerable,
+									writable: descriptor.enumerable
+								}];
+
+							})));
+
+							Object.defineProperties(result, Object.fromEntries(newKeys.map((key) => {
+								return [key, Object.getOwnPropertyDescriptor(second, key)];
+							})));
+
+							first = result;
 
 							break;
 
