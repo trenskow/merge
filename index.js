@@ -20,6 +20,8 @@ const _merge = (options = {}) => {
 		};
 	}
 
+	options.objectKeyLookupMethod = options.objectKeyLookupMethod || 'getOwnPropertyNames';
+
 	return (...values) => {
 
 		while (values.length > 1) {
@@ -51,8 +53,8 @@ const _merge = (options = {}) => {
 					switch (options.object || 'merge') {
 						case 'merge': {
 
-							const firstKeys = Object.getOwnPropertyNames(first);
-							const secondKeys = Object.getOwnPropertyNames(second);
+							const firstKeys = Object[options.objectKeyLookupMethod](first);
+							const secondKeys = Object[options.objectKeyLookupMethod](second);
 
 							const oldKeys = firstKeys.filter((key) => !secondKeys.includes(key));
 							const newKeys = secondKeys.filter((key) => !firstKeys.includes(key));
