@@ -1,6 +1,6 @@
 {
 	"name": "@trenskow/merge",
-	"version": "0.1.43",
+	"version": "0.1.44",
 	"description": "A small library for doing recursive `Object.assign`.",
 	"main": "index.js",
 	"type": "module",
