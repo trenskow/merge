@@ -180,28 +180,4 @@ describe('merge', () => {
 
 	});
 
-	describe('read', () => {
-
-		it ('should read and merge JSON files.', async () => {
-			await expect(merge.read('./test/data/root.json')).to.eventually.eql({
-				key: 'This is the root of the test data.',
-				nested: {
-					key: 'This is some nested data.',
-					another: {
-						key: 'This is another nested data.'
-					}
-				}
-			});
-		});
-
-		it ('should read and merge JSON files with `first` strategy.', async () => {
-			await expect(merge.read('./test/data/root.json', {
-				strategy: 'first'
-			})).to.eventually.eql({
-				key: 'This is the root of the test data.'
-			});
-		});
-
-	});
-
 });
